@@ -45,8 +45,10 @@ namespace AuthService.WebAPI.Controllers
         }
 
         [HttpGet("refresh")]
-        public async Task<IActionResult> GetRefreshAsync()
+        public async Task<IActionResult> GetRefreshedTokensAsync()
         {
+            Request.Cookies.TryGetValue("refreshToken", out var refreshToken);
+            //var query = new RefreshTokenQuery(refreshToken);
             return Ok();
         }
 

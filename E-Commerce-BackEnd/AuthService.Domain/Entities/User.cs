@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 
 namespace AuthService.Domain.Entities
 {
     public record User
     {
         [Key]
-        public long UserId { get; init; }
+        public BigInteger UserId { get; init; }
         [Required]
         [StringLength(20)]
         public required string FirstName { get; init; }
@@ -23,5 +24,7 @@ namespace AuthService.Domain.Entities
         public DateTime? LastUpdatedAt { get; init; }
         public bool IsTwoFactorAuthEnabled { get; init; } = false;
         public string Role { get; init; } = "User";
+
+        public ICollection<RefreshToken> RefreshTokens { get; init; } = new List<RefreshToken>();
     }
 }

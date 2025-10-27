@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Ecommerce_v1 : Migration
+    public partial class E_Commerce_v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace AuthService.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),

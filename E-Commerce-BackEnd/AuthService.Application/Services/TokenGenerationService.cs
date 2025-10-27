@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using AuthService.Application.Interfaces.Services;
+using System.Numerics;
+using AuthService.Domain.Data;
 
 namespace AuthService.Application.Services
 {
@@ -17,14 +19,19 @@ namespace AuthService.Application.Services
             _configuration = configuration;
         }
 
-        public async Task<(string accessToken, string refreshToken)> GenerateAccessAndRefreshTokensAsync(long userId, string email, string role)
+        public async Task<TokensData> GenerateAccessAndRefreshTokensAsync(BigInteger userId, string email, string role)
         {
             var accessToken = await GenerateAccessTokenAsync(userId, email, role);
-            var refreshToken = GenerateRefreshToken();
-            return (accessToken, refreshToken);
+            var refreshToken = GenerateRefreshTokenAsync(userId);
+            var tokensData = new TokensData
+            {
+                AccessToken = accessToken,
+                RefreshTokenData = refreshToken
+            };
+            return tokensData;
         }
 
-        private Task<string> GenerateAccessTokenAsync(long userId, string email, string role)
+        private Task<string> GenerateAccessTokenAsync(BigInteger userId, string email, string role)
         {
             var claims = new[]
             {
@@ -35,6 +42,9 @@ namespace AuthService.Application.Services
             };
 
             var keyString = _configuration["JwtSettings:Key"];
+            if (string.IsNullOrEmpty(keyString))
+                throw new InvalidOperationException("JWT key is not configured.");
+
             var issuer = _configuration["JwtSettings:Issuer"];
             var audience = _configuration["JwtSettings:Audience"];
             var expirationMinutes = double.TryParse(_configuration["JwtSettings:AccessTokenExpirationMinutes"], out var minutes) ? minutes : 15;
@@ -54,12 +64,19 @@ namespace AuthService.Application.Services
             return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        private string GenerateRefreshToken(int size = 64)
+        private RefreshTokenData GenerateRefreshTokenAsync(BigInteger userId,int size = 64)
         {
             var randomNumber = new byte[size];
             using var rng = RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
-            return Convert.ToBase64String(randomNumber);
+            string refreshToken =  Convert.ToBase64String(randomNumber);
+            return new RefreshTokenData
+            {
+                Token = refreshToken,
+                CreatedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.UtcNow.AddDays(7),
+                UserId = userId
+            };
         }
     }
 }

@@ -1,16 +1,18 @@
 ﻿using AuthService.Application.Features.Queries;
 using AuthService.Application.Interfaces.Repositories;
 using AuthService.Application.Interfaces.Services;
+using AuthService.Domain.Entities;
 using MediatR;
 
 namespace AuthService.Application.Features.QueryHandlers
 {
     public class LoginQueryHandler(IPasswordService passwordService,
         ITokenGenerationService tokenGenerationService,
-        IUserRepository userRepository): IRequestHandler<LoginQuery, (string accessToken, string refreshToken)>
+        IUserRepository userRepository,
+        IRefreshTokenRepository refreshTokenRepository): IRequestHandler<LoginQuery, (string accessToken, string refreshToken)>
     {
 
-        public async Task<(string, string)> Handle(LoginQuery request, CancellationToken cancellationToken)
+        public async Task<(string accessToken, string refreshToken)> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -24,7 +26,15 @@ namespace AuthService.Application.Features.QueryHandlers
                     throw new Exception("invalid credentials");
                 }
                 var tokens = await tokenGenerationService.GenerateAccessAndRefreshTokensAsync(user.UserId, user.Email, user.Role);
-                return tokens;
+                var newRefreshToken = new RefreshToken()
+                {
+                    Token = tokens.RefreshTokenData.Token,
+                    ExpiresAt = tokens.RefreshTokenData.ExpiresAt,
+                    CreatedAt = tokens.RefreshTokenData.CreatedAt,
+                    UserId = tokens.RefreshTokenData.UserId
+                };
+                await refreshTokenRepository.AddTokenAsync(newRefreshToken);
+                return (tokens.AccessToken, tokens.RefreshTokenData.Token);
             }
             catch
             {

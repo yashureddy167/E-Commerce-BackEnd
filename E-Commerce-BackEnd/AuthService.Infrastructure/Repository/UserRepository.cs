@@ -11,7 +11,7 @@ namespace AuthService.Infrastructure.Repository
         {
             try
             {
-                await db.User.AddAsync(user, cancellationToken);
+                await db.Users.AddAsync(user, cancellationToken);
                 var result = await db.SaveChangesAsync(cancellationToken);
                 return result > 0;
             }
@@ -22,7 +22,7 @@ namespace AuthService.Infrastructure.Repository
         {
             try
             {
-                return await db.User.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+                return await db.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
             }
             catch { throw; }
         }

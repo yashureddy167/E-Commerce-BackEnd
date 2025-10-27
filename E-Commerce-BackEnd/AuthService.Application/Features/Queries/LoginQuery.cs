@@ -1,4 +1,5 @@
 ﻿using AuthService.Application.DTO_s;
+using AuthService.Domain.Data;
 using MediatR;
 
 namespace AuthService.Application.Features.Queries

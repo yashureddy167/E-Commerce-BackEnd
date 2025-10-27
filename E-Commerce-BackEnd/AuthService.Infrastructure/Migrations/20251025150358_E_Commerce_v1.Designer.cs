@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthService.Infrastructure.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20251020124350_Ecommerce_v1.1")]
-    partial class Ecommerce_v11
+    [Migration("20251025150358_E_Commerce_v1")]
+    partial class E_Commerce_v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
