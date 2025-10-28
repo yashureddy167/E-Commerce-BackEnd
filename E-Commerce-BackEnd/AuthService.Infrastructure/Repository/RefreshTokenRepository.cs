@@ -27,7 +27,7 @@ namespace AuthService.Infrastructure.Repository
             catch { throw; }
         }
 
-        public async Task<RefreshToken?> GetRefreshTokenDetails(string refreshToken)
+        public async Task<RefreshToken?> GetRefreshTokenDetailsAsync(string refreshToken)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace AuthService.Infrastructure.Repository
             catch { throw; }
         }
 
-        public async Task UpdateTokenDetails(RefreshToken refreshToken)
+        public async Task UpdateTokenDetailsAsync(RefreshToken refreshToken)
         {
             try
             {

@@ -5,6 +5,6 @@ namespace AuthService.Application.Interfaces.Services
 {
     public interface ITokenGenerationService
     {
-        Task<TokensData> GenerateAccessAndRefreshTokensAsync(BigInteger userId, string email, string role);
+        Task<TokensData> GenerateAccessAndRefreshTokensAsync(long userId, string email, string role);
     }
 }

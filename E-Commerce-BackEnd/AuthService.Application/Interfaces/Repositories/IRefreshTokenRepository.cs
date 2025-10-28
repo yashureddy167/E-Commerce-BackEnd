@@ -5,7 +5,7 @@ namespace AuthService.Application.Interfaces.Repositories
     {
         Task AddTokenAsync(RefreshToken refreshToken);
         Task RemoveTokenAsync(RefreshToken refreshToken);
-        Task<RefreshToken?> GetRefreshTokenDetails(string refreshToken);
-        Task UpdateTokenDetails(RefreshToken refreshToken);
+        Task<RefreshToken?> GetRefreshTokenDetailsAsync(string refreshToken);
+        Task UpdateTokenDetailsAsync(RefreshToken refreshToken);
     }
 }

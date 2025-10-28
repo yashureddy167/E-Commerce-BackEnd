@@ -5,17 +5,17 @@ namespace AuthService.Domain.Entities
 {
     public record RefreshToken
     {
-        public BigInteger RefreshTokenId { get; init; }
-        public required string Token { get; init; }
-        public DateTime ExpiresAt { get; init; }
-        public DateTime CreatedAt { get; init; }
-        public DateTime? RevokedAt { get; init; }
+        public long RefreshTokenId { get; set; }
+        public required string Token { get; set; }
+        public DateTime ExpiresAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? RevokedAt { get; set; }
         public bool IsActive => RevokedAt == null && DateTime.UtcNow <= ExpiresAt;
         [ForeignKey("User")]
-        public BigInteger UserId { get; init; }
+        public long UserId { get; set; }
         public bool IsExpired => DateTime.UtcNow > ExpiresAt;
 
         // Navigation property
-        public User User { get; init; } = null!;
+        public User User { get; set; } = null!;
     }
 }

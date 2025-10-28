@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Numerics;
 
 namespace AuthService.Domain.Entities
 {
     public record User
     {
         [Key]
-        public BigInteger UserId { get; init; }
+        public long UserId { get; init; }
         [Required]
         [StringLength(20)]
         public required string FirstName { get; init; }

@@ -26,5 +26,14 @@ namespace AuthService.Infrastructure.Repository
             }
             catch { throw; }
         }
+
+        public async Task<User?> GetUserByUserIdAsync(long userId, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await db.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
+            }
+            catch { throw; }
+        }
     }
 }

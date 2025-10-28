@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.IdentityModel.Tokens.Jwt;
+﻿using AuthService.Application.Interfaces.Services;
+using AuthService.Domain.Data;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using AuthService.Application.Interfaces.Services;
-using System.Numerics;
-using AuthService.Domain.Data;
 
 namespace AuthService.Application.Services
 {
@@ -19,7 +18,7 @@ namespace AuthService.Application.Services
             _configuration = configuration;
         }
 
-        public async Task<TokensData> GenerateAccessAndRefreshTokensAsync(BigInteger userId, string email, string role)
+        public async Task<TokensData> GenerateAccessAndRefreshTokensAsync(long userId, string email, string role)
         {
             var accessToken = await GenerateAccessTokenAsync(userId, email, role);
             var refreshToken = GenerateRefreshTokenAsync(userId);
@@ -31,7 +30,7 @@ namespace AuthService.Application.Services
             return tokensData;
         }
 
-        private Task<string> GenerateAccessTokenAsync(BigInteger userId, string email, string role)
+        private Task<string> GenerateAccessTokenAsync(long userId, string email, string role)
         {
             var claims = new[]
             {
@@ -64,7 +63,7 @@ namespace AuthService.Application.Services
             return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        private RefreshTokenData GenerateRefreshTokenAsync(BigInteger userId,int size = 64)
+        private RefreshTokenData GenerateRefreshTokenAsync(long userId,int size = 64)
         {
             var randomNumber = new byte[size];
             using var rng = RandomNumberGenerator.Create();

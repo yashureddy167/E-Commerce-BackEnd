@@ -2,5 +2,5 @@
 
 namespace AuthService.Application.Features.Commands
 {
-    public record AddRefreshTokenCommand(string refreshToken): IRequest;
+    public record LogoutCommand(string RefreshToken) : IRequest;
 }
