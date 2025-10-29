@@ -1,4 +1,4 @@
-﻿namespace AuthService.Domain.Data
+﻿namespace AuthService.Application.Data
 {
     public class RefreshTokenData
     {

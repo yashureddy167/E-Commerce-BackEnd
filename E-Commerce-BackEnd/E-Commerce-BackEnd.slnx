@@ -1,8 +1,14 @@
 <Solution>
   <Folder Name="/AuthService/">
-    <Project Path="AuthService.Application/AuthService.Application.csproj" />
-    <Project Path="AuthService.Domain/AuthService.Domain.csproj" />
-    <Project Path="AuthService.Infrastructure/AuthService.Infrastructure.csproj" />
-    <Project Path="AuthService.WebAPI/AuthService.WebAPI.csproj" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/AuthService.Application/AuthService.Application.csproj" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/AuthService.Domain/AuthService.Domain.csproj" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/AuthService.Infrastructure/AuthService.Infrastructure.csproj" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/AuthService.WebAPI/AuthService.WebAPI.csproj" />
+  </Folder>
+  <Folder Name="/ProductService/">
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/ProductService.Application/ProductService.Application.csproj" Id="64522cc8-8a8c-46c2-bd71-631ebef52aec" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/ProductService.Domain/ProductService.Domain.csproj" Id="c9aebaae-e967-4d11-8303-2ccf5581277c" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/ProductService.Infrastructure/ProductService.Infrastructure.csproj" Id="3e5db09c-4552-4278-8e18-ba016ded6139" />
+    <Project Path="D:/DotnetProjects/E-Commerce-BackEnd/E-Commerce-BackEnd/ProductService.WebAPI/ProductService.WebAPI.csproj" Id="94964317-e889-4e19-a492-5aa09bdc6ad3" />
   </Folder>
 </Solution>

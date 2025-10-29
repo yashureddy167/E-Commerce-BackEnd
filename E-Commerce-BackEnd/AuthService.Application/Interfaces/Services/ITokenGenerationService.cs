@@ -1,5 +1,4 @@
-﻿using AuthService.Domain.Data;
-using System.Numerics;
+﻿using AuthService.Application.Data;
 
 namespace AuthService.Application.Interfaces.Services
 {
